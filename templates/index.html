@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>電卓</title>
+    <style>
+        .calculator {
+            width: 300px;
+            margin: 0 auto;
+            border: 1px solid #ccc;
+            padding: 20px;
+            text-align: center;
+        }
+        .calculator input[type="text"] {
+            width: 90%;
+            margin-bottom: 10px;
+            padding: 10px;
+            font-size: 20px;
+            text-align: right;
+        }
+        .calculator .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-gap: 10px;
+        }
+        .calculator button {
+            padding: 10px;
+            font-size: 20px;
+            background-color: #eee;
+            border: 1px solid #ccc;
+            cursor: pointer;
+        }
+        .calculator button:hover {
+            background-color: #ddd;
+        }
+        .calculator .zero {
+            grid-column: 1 / span 3;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <input type="text" id="result" name="result" value="{{ result or '' }}" readonly>
+        <div class="buttons">
+            <button>7</button>
+            <button>8</button>
+            <button>9</button>
+            <button>/</button>
+            <button>4</button>
+            <button>5</button>
+            <button>6</button>
+            <button>*</button>
+            <button>1</button>
+            <button>2</button>
+            <button>3</button>
+            <button>-</button>
+            <button class="zero">0</button>
+            <button>.</button>
+            <button>=</button>
+            <button>+</button>
+        </div>
+    </div>
+    <script>
+        const buttons = document.querySelectorAll('.calculator button');
+        const resultInput = document.getElementById('result');
+
+        buttons.forEach(button => {
+            button.addEventListener('click', function() {
+                const buttonText = this.innerText;
+                if (buttonText === '=') {
+                    // 計算処理をここに記述
+                    resultInput.value = eval(resultInput.value);
+                } else if (buttonText === 'AC') {
+                    resultInput.value = '';
+                } else {
+                    resultInput.value += buttonText;
+                }
+            });
+        });
+    </script>
+</body>
+</html>
